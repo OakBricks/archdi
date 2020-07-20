@@ -12,21 +12,21 @@
 
 
 
-apptitle="Arch Linux Desktop Install (archdi) - Version: 2019.07.03.22.44.21 (GPLv3)"
+apptitle="NotDebian Installer"
 version="2019.07.03.22.44.21"
-cachedir=~/.cache/archdi
+cachedir=~/.cache/NotDebianInstaller
 
-lastverurl1=http://archdi.sourceforge.net/version
-lastverurl2=https://raw.githubusercontent.com/MatMoul/archdi/master/version
+#lastverurl1=http://archdi.sourceforge.net/version
+lastverurl2=https://raw.githubusercontent.com/OakBricks/NotDebianInstaller/master/version
 
-binurl1=archdi.sourceforge.net/archdi
+#binurl1=archdi.sourceforge.net/archdi
 binurl2=matmoul.github.io/archdi
 
-liburl1=http://archdi.sourceforge.net/archdi-lib
-liburl2=https://raw.githubusercontent.com/MatMoul/archdi-pkg/master/lib
+#liburl1=http://archdi.sourceforge.net/archdi-lib
+liburl2=https://raw.githubusercontent.com/OakBricks/NotDebianInstaller-pkg/master/lib
 
-pkgurl1=http://archdi.sourceforge.net/archdi-pkg
-pkgurl2=https://raw.githubusercontent.com/MatMoul/archdi-pkg/master/pkg.tar
+#pkgurl1=http://archdi.sourceforge.net/archdi-pkg
+pkgurl2=https://raw.githubusercontent.com/OakBricks/NotDebianInstaller-pkg/master/pkg.tar
 
 
 help(){
@@ -89,7 +89,7 @@ run(){
         fi
       else
         sed -i "/apptitle=/c\apptitle=\"Arch Linux Desktop Install (archdi) - Branch: $branchoption (GPLv3)\"" lib
-        sed -i "/baseurl=/c\baseurl=https://raw.githubusercontent.com/$githubuser/archdi-pkg/$branchoption" lib
+        sed -i "/baseurl=/c\baseurl=https://raw.githubusercontent.com/$githubuser/NotDebianInstaller-pkg/$branchoption" lib
         ./lib --root
         if [ ! "$?" = "0" ]; then
           archdi --branch master
@@ -166,7 +166,7 @@ chkupgrade(){
   fi
 }
 
-branchoption=""
+branchoption="master"
 while (( "$#" )); do
   case $1 in
     -h|--help) help
@@ -176,12 +176,12 @@ while (( "$#" )); do
     --chroot) chrootoption="true";;
     -b | --branch)
       shift
-      liburl1=https://raw.githubusercontent.com/MatMoul/archdi-pkg/$1/lib
-      liburl2=https://raw.githubusercontent.com/MatMoul/archdi-pkg/$1/lib
+      liburl1=https://raw.githubusercontent.com/OakBricks/NotDebianInstaller-pkg/$1/lib
+      liburl2=https://raw.githubusercontent.com/OakBricks/NotDebianInstaller-pkg/$1/lib
       pkgurl1=""
       pkgurl2=""
       branchoption="$1"
-      githubuser="MatMoul"
+      githubuser="OakBricks"
     ;;
     -l | --local)
       shift
@@ -191,11 +191,11 @@ version="2019.07.03.22.44.21"
     ;;
     -t | --test)
       shift
-      liburl1=https://raw.githubusercontent.com/$1/archdi-pkg/$2/lib
-      liburl2=https://raw.githubusercontent.com/$1/archdi-pkg/$2/lib
+      liburl1=https://raw.githubusercontent.com/$1/NotDebianInstaller-pkg/$2/lib
+      liburl2=https://raw.githubusercontent.com/$1/NotDebianInstaller-pkg/$2/lib
       pkgurl1=""
       pkgurl2=""
-      branchoption="$2"
+      1="$2"
       githubuser="$1"
     ;;
   esac
